@@ -85,46 +85,69 @@ var upperCasedCharacters = [
   //click the button to generate a password
   var generateBtn =document.querySelector('generate');
 
-
-  var passwordLength;
-  var confimeLowerCase;
-  var confirmeUpperCase;
-  var confirmNumber;
-
   // Array of numeric characters to be included in password
-
 var numericCharacters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 var choiceArray = [];
 
 //user option function
 function userOptions() {
-    var numbers= confirm("do you want numbers")
-    console.log(numbers)
+  var passwordLength = prompt ("Choose password length between 8 and 128");
+  console.log("password length" + passwordLength);
+  if (isNaN(passwordLength) === false ){
+    if (passwordLength <8 || passwordLength> 128) {
+      alert('password lengh did not meet');
+      return; 
+      }
+  } else {
+    alert('please enter a number')
+    
+  }
+    var hasConfirmNumber= confirm("do you want numbers");
+    var hasConfirmLowerCase= confirm("do you want lowercase");
+    var hasConfirmSpecialCharacters= confirm("do you want special characters");
+    var hasConfirmUpperCase=confirm("do you want uppercase");
+    //check user selections
+    if (hasConfirmNumber == false && hasConfirmSpecialCharacters == false && hasConfirmUpperCase == false && hasConfirmLowerCase == false){
+      alert("please select at least one character type" );
+      return;
+    } 
+
+  var passwordOptions = {
+    length: passwordLength,
+    hasNumber: hasConfirmNumber,
+    hasUpperCase: hasConfirmUpperCase,
+    hasLowerCase: hasConfirmLowerCase,
+    hasSpecialCharacters: hasConfirmSpecialCharacters,
+  };
+  return passwordOptions;
 }
+
+
 var generateBtn = document.querySelector("#generate");
 
 //input password function
 function writePassword() {
     var password = generatePassword();
     var passwordText = document.querySelector("#password");
-
-    // userOptions()
-    // passwordText.value = password;
-    // window.alert('hello');
 }
 //generate password function
 function generatePassword() {
-//prompts for password criteria
-passwordLength = prompt("choose a length of at least 8 characters and no more than 128 characters")
+ var options = userOptions();
+ 
+ console.log(options.hasUpperCase);
+//create variable aaray of options for password
+var possibleCharacters = []
+if (options.hasUpperCase){
+  //store 
+  possibleCharacters = possibleCharacters.concat(upperCasedCharacters);
 
-  //conditional statments 
-  if (passwordLength <8 || passwordLength> 128) {
-  alert('password lengh did not meet')
-  }
-
-if
+  console.log(possibleCharacters);
 }
+
+}
+
+//prompt 
 //Event listener
 generateBtn.addEventListener("click", writePassword);
 
