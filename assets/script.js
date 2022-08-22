@@ -82,21 +82,22 @@ var upperCasedCharacters = [
     '_',
     '.'
   ];
-  //click the button to generate a password
-  var generateBtn =document.querySelector('generate');
-
-  // Array of numeric characters to be included in password
+   // Array of numeric characters to be included in password
 var numericCharacters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+  //click the button to generate a password
+var generateBtn =document.querySelector('generate');
+
 
 var choiceArray = [];
 
 //user option function
 function userOptions() {
-  var passwordLength = prompt ("Choose password length between 8 and 128");
+  var passwordLength = prompt ("Choose password length between 8 and 128 characters");
   console.log("password length" + passwordLength);
   if (isNaN(passwordLength) === false ){
     if (passwordLength <8 || passwordLength> 128) {
-      alert('password lengh did not meet');
+      alert('password lengh did not meet between 8 and 128 characters');
       return; 
       }
   } else {
@@ -122,8 +123,6 @@ function userOptions() {
   };
   return passwordOptions;
 }
-
-
 var generateBtn = document.querySelector("#generate");
 
 //input password function
@@ -136,18 +135,26 @@ function generatePassword() {
  var options = userOptions();
  
  console.log(options.hasUpperCase);
+ 
 //create variable aaray of options for password
 var possibleCharacters = []
 if (options.hasUpperCase){
   //store 
   possibleCharacters = possibleCharacters.concat(upperCasedCharacters);
-
-  console.log(possibleCharacters);
+ 
+if (options.hasSpecialCharacters){
+  possibleCharacters = possibleCharacters.concat(specialCharacters);
+}
+if (options.hasLowerCase){
+  possibleCharacters = possibleCharacters.concat(lowerCasedCharacters);
+}
+console.log(possibleCharacters);
+if (options.hasNumber){
+  possibleCharacters = possibleCharacters.concat(numericCharacters);
+}
+}
 }
 
-}
-
-//prompt 
 //Event listener
 generateBtn.addEventListener("click", writePassword);
 
