@@ -85,31 +85,27 @@ var upperCasedCharacters = [
    // Array of numeric characters to be included in password
 var numericCharacters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-  //click the button to generate a password
 var generateBtn =document.querySelector('generate');
-
-
 var choiceArray = [];
 
 //user option function
 function userOptions() {
-  var passwordLength = prompt ("Choose password length between 8 and 128 characters");
-  console.log("password length" + passwordLength);
+
+  var passwordLength = prompt ("How many characters would you like your password to contain?");
+  //console.log("password length" + passwordLength);
   if (isNaN(passwordLength) === false ){
     if (passwordLength <8 || passwordLength> 128) {
-      alert('password lengh did not meet between 8 and 128 characters');
-      return; 
-      }
-  } else {
-    alert('please enter a number')
-    
+      alert('Password length must be a number between 8-128 characters!');
+      return;
+    }     
   }
-    var hasConfirmNumber= confirm("do you want numbers");
-    var hasConfirmLowerCase= confirm("do you want lowercase");
-    var hasConfirmSpecialCharacters= confirm("do you want special characters");
-    var hasConfirmUpperCase=confirm("do you want uppercase");
-    //check user selections
-    if (hasConfirmNumber == false && hasConfirmSpecialCharacters == false && hasConfirmUpperCase == false && hasConfirmLowerCase == false){
+  //
+  var hasConfirmNumber= confirm("Click ok to include Numeric characters");
+  var hasConfirmLowerCase= confirm("Click ok to include LowerCase characters");
+  var hasConfirmSpecialCharacter= confirm("Click ok to include Special characters");
+  var hasConfirmUpperCase= confirm("click ok to include UpperCase characters");
+
+    if (hasConfirmNumber === false && hasConfirmSpecialCharacter === false && hasConfirmUpperCase === false && hasConfirmLowerCase === false){
       alert("please select at least one character type" );
       return;
     } 
@@ -119,11 +115,13 @@ function userOptions() {
     hasNumber: hasConfirmNumber,
     hasUpperCase: hasConfirmUpperCase,
     hasLowerCase: hasConfirmLowerCase,
-    hasSpecialCharacters: hasConfirmSpecialCharacters,
+    hasSpecialCharacter: hasConfirmSpecialCharacter,
   };
+
+  console.log(passwordOptions);
   return passwordOptions;
 }
-var generateBtn = document.querySelector("#generate");
+var generateBtn = document.querySelector("#generate"); //question?
 
 //input password function
 function writePassword() {
@@ -132,28 +130,31 @@ function writePassword() {
 }
 //generate password function
 function generatePassword() {
- var options = userOptions();
- 
- console.log(options.hasUpperCase);
- 
-//create variable aaray of options for password
-var possibleCharacters = []
-if (options.hasUpperCase){
-  //store 
-  possibleCharacters = possibleCharacters.concat(upperCasedCharacters);
- 
-if (options.hasSpecialCharacters){
-  possibleCharacters = possibleCharacters.concat(specialCharacters);
+  var options = userOptions();
+  //create variable aaray of options for password
+  var possibleCharacters = []
+  if (options.hasUpperCase){
+    possibleCharacters = possibleCharacters.concat(upperCasedCharacters); //store
+  } 
+  if (options.hasSpecialCharacter){
+    possibleCharacters = possibleCharacters.concat(specialCharacters);
+  }
+  if (options.hasLowerCase){
+    possibleCharacters = possibleCharacters.concat(lowerCasedCharacters);
+  }
+  console.log(possibleCharacters);
+  if (options.hasNumber){
+    possibleCharacters = possibleCharacters.concat(numericCharacters);
+  }
+
+  var result =[]
+  for (var i=0; i < options.length; i++){
+    var c = possibleCharacters[i];
+    console.log(c);
+  }
+  
 }
-if (options.hasLowerCase){
-  possibleCharacters = possibleCharacters.concat(lowerCasedCharacters);
-}
-console.log(possibleCharacters);
-if (options.hasNumber){
-  possibleCharacters = possibleCharacters.concat(numericCharacters);
-}
-}
-}
+
 
 //Event listener
 generateBtn.addEventListener("click", writePassword);
