@@ -118,7 +118,7 @@ function userOptions() {
     hasSpecialCharacter: hasConfirmSpecialCharacter,
   };
 
-  console.log(passwordOptions);
+  //console.log(passwordOptions);
   return passwordOptions;
 }
 var generateBtn = document.querySelector("#generate"); //question?
@@ -127,6 +127,7 @@ var generateBtn = document.querySelector("#generate"); //question?
 function writePassword() {
     var password = generatePassword();
     var passwordText = document.querySelector("#password");
+    passwordText.value = password
 }
 //generate password function
 function generatePassword() {
@@ -142,19 +143,23 @@ function generatePassword() {
   if (options.hasLowerCase){
     possibleCharacters = possibleCharacters.concat(lowerCasedCharacters);
   }
-  console.log(possibleCharacters);
   if (options.hasNumber){
     possibleCharacters = possibleCharacters.concat(numericCharacters);
   }
+  //console.log(possibleCharacters);
 
   var result =[]
   for (var i=0; i < options.length; i++){
-    var c = possibleCharacters[i];
-    console.log(c);
+    var c = getRandomCharacters(possibleCharacters);
+    result.push(c);
   }
-  
+  return result;
 }
 
+function getRandomCharacters(availableCharacters){
+  var randomIndex= Math.floor(Math.random() * availableCharacters.length)
+  return availableCharacters[randomIndex];
+}
 
 //Event listener
 generateBtn.addEventListener("click", writePassword);
