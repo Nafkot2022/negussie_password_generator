@@ -121,20 +121,13 @@ function userOptions() {
   //console.log(passwordOptions);
   return passwordOptions;
 }
-var generateBtn = document.querySelector("#generate"); //question?
-
-//input password function
-function writePassword() {
-    var password = generatePassword();
-    var passwordText = document.querySelector("#password");
-    passwordText.value = password
-}
+var generateBtn = document.querySelector("#generate"); 
 //generate password function
 function generatePassword() {
   var options = userOptions();
   //create variable aaray of options for password
   var possibleCharacters = []
-  if (options.hasUpperCase){
+  if (options.hasUpperCase) {
     possibleCharacters = possibleCharacters.concat(upperCasedCharacters); //store
   } 
   if (options.hasSpecialCharacter){
@@ -161,8 +154,16 @@ function getRandomCharacters(availableCharacters){
   return availableCharacters[randomIndex];
 }
 
+//input password function
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
+  passwordText.value = password
+}
+
 //Event listener
 generateBtn.addEventListener("click", writePassword);
+
 
 
 
