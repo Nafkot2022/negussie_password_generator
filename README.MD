@@ -1,7 +1,7 @@
 Password Generator Application
 
 Description:
-This application allows users to randomly generate unique passwords that meet certain criteria that provide greater security.  
+This application allows users to randomly generate unique passwords that meet certain criteria which provide greater security for user.  
 
 Criterias include:
 1) Password lenght of 8-126 characters.
